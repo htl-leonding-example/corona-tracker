@@ -30,6 +30,11 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
 
+      - name: create .ssh/known_hosts
+        run: |
+          ssh-keyscan -H -t rsa -v ${{ secrets.SERVER_IP }}  >> ~/.ssh/known_host
+
+
       # Cache and restore maven .m2-repository
       - name: Cache local Maven repository
         uses: actions/cache@v2
@@ -71,6 +76,12 @@ jobs:
       #    ls -lh
       #    mvn package -Dquarkus.package.type=native -Dmaven.test.skip=true
       #    ls target
+
+      - name: copy binaries to server
+        working-directory: backend
+        run: |
+          ls -l target/
+          scp -i ${{ secrets.SERVER_SSH_PRIVATE_KEY }} ./datasource.txt ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}
 
 
 
