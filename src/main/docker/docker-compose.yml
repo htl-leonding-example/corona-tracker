@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3"
 
 services:
   postgres:
@@ -13,7 +13,7 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
 
   covid-tracker:
-    image: ghcr.io/htl-leonding-example/covid-tracker:latest
+    image: ghcr.io/htl-leonding-example/corona-tracker:latest
     ports:
       - '8080:8080'
     environment:
