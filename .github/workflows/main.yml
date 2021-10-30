@@ -32,7 +32,7 @@ jobs:
 
       - name: create .ssh/known_hosts
         run: |
-          ssh-keyscan -H -t rsa -v ${{ secrets.SERVER_IP }}  >> ~/.ssh/known_host
+          ssh-keyscan -H -t rsa -v ${{ secrets.SERVER_IP }}  >> ~/.ssh/known_hosts
 
 
       # Cache and restore maven .m2-repository
