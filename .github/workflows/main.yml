@@ -47,7 +47,7 @@ jobs:
       - run: java -version
 
       # Install native-image
-      #- name: Install native-image component
-      #  run: |
-      #    ${{ matrix.gu-binary }} install native-image
+      - name: Install native-image component
+        run: |
+          gu install native-image
 
