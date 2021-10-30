@@ -114,6 +114,6 @@ jobs:
           docker image tag htl-leonding/covid-tracker:${{ env.RELEASE_VERSION }} $IMAGE_ID:${{ env.RELEASE_VERSION }}
           docker image tag htl-leonding/covid-tracker:${{ env.RELEASE_VERSION }} $IMAGE_ID:latest
           docker image ls | grep htl-leonding
-          #docker image push ghcr.io/${{ github.actor }}/corona-tracker:${{ env.RELEASE_VERSION }}
-          docker image push --all-tags ghcr.io/${{ github.actor }}/corona-tracker
+          #docker image push $IMAGE_ID:${{ env.RELEASE_VERSION }}
+          docker image push --all-tags $IMAGE_ID
 
