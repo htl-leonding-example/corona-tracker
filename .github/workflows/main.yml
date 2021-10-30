@@ -97,7 +97,7 @@ jobs:
          #mvn package -Dquarkus.package.type=uber-jar -Dquarkus.container-image.push=true -Dquarkus.container-image.registry=${{ env.REGISTRY }} -Dquarkus.jib.base-registry-username=${{ github.actor }} -Dquarkus.jib.base-registry-password=${{ secrets.REGISTRY_ACCESS_TOKEN }}
          mvn package -Dquarkus.package.type=uber-jar
          docker image ls
-         docker image tag htl-leonding/covid-tracker:${{ env.RELEASE_VERSION }} ghcr.io/${{ github.actor }}/covid-tracker:${{ env.RELEASE_VERSION }}
+         docker image tag htl-leonding/covid-tracker:${{ env.RELEASE_VERSION }} ghcr.io/${{ github.actor }}/corona-tracker:${{ env.RELEASE_VERSION }}
          docker image ls
-         docker push ghcr.io/${{ github.actor }}/covid-tracker:${{ env.RELEASE_VERSION }}
+         docker push ghcr.io/${{ github.actor }}/corona-tracker:${{ env.RELEASE_VERSION }}
 
