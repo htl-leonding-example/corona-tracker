@@ -54,5 +54,6 @@ jobs:
       # Create native build
       - name: Create native build
         run: |
+          cd $GITHUB_WORKSPACE
           ll
           mvn package -Dquarkus.package.type=native -Dmaven.test.skip=true
