@@ -13,7 +13,7 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
 
   covid-tracker:
-    image: ghcr.io/htl-leonding/covid-tracker:1.0.0
+    image: ghcr.io/htl-leonding-example/covid-tracker:latest
     ports:
       - '8080:8080'
     environment:
