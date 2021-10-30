@@ -94,5 +94,4 @@ jobs:
 
       - name: Create jvm build
         run: |
-         mvn package -Dquarkus.package.type=uber-jar
-         mvn clean package -Dquarkus.container-image.push=true -Dquarkus.container-image.registry=${{ env.REGISTRY }} -Dquarkus.jib.base-registry-username=${{ github.actor }} -Dquarkus.jib.base-registry-password=${{ secrets.GITHUB_TOKEN }}
+         mvn package -Dquarkus.package.type=uber-jar -Dquarkus.container-image.push=true -Dquarkus.container-image.registry=${{ env.REGISTRY }} -Dquarkus.jib.base-registry-username=${{ github.actor }} -Dquarkus.jib.base-registry-password=${{ secrets.GITHUB_TOKEN }}
