@@ -78,7 +78,6 @@ jobs:
       #    ls target
 
       - name: copy binaries to server
-        working-directory: backend
         run: |
           ls -lh
           scp ./datasource.txt ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}
