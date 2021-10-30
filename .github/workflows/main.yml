@@ -107,14 +107,23 @@ jobs:
       - name: Push Image
         run: |
           #IMAGE_ID=ghcr.io/${{ github.actor }}/corona-tracker
+          #ACHTUNG: Es ist wichtig, den Organisationsnamen zu verwenden (!= github.actor)
           IMAGE_ID=ghcr.io/htl-leonding-example/corona-tracker
 
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
 
+          # Das Image wird mit mehreren Tags versehen
           docker image tag htl-leonding/covid-tracker:${{ env.RELEASE_VERSION }} $IMAGE_ID:${{ env.RELEASE_VERSION }}
           docker image tag htl-leonding/covid-tracker:${{ env.RELEASE_VERSION }} $IMAGE_ID:latest
           docker image ls | grep htl-leonding
+
           #docker image push $IMAGE_ID:${{ env.RELEASE_VERSION }}
+          # Alle Images werden gepushed
           docker image push --all-tags $IMAGE_ID
 
+      - name: install on server
+        run: |
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /opt/docker/corona-tracker && docker-compose down"
+          scp src/main/docker/docker-compose.yml ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/opt/docker/corona-tracker/
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /opt/docker/corona-tracker && docker-compose up -d"
