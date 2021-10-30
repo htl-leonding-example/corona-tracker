@@ -80,7 +80,7 @@ jobs:
       - name: copy binaries to server
         run: |
           ls -lh
-          scp ./datasource.txt ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/home/${{ secrets.SERVER_USER }}
+          scp ./datasource.txt ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/home/${{ secrets.SERVER_USER }}/
 
 
 
