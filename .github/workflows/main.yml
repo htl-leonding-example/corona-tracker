@@ -52,34 +52,34 @@ jobs:
       - name: Run a one-line script
         run: cat ~/.ssh/known_hosts
 
-      ## Runs a set of commands using the runners shell
-      #- name: Run a multi-line script
-      #  run: |
-      #    echo Add other actions to build,
-      #    echo test, and deploy your project.
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
 
-      ## Install graalvm
-      #- uses: DeLaGuardo/setup-graalvm@5.0
-      #  with:
-      #    # GraalVM version, no pattern syntax available atm
-      #    graalvm: '21.3.0'
-      #    # Java version, optional, defaults to 'java8'. Available options are 'java8' and 'java11'.
-      #    java: 'java17'
-      #    # Architecture flag, optional, defaults to 'amd64'. Available options are 'amd64' and 'aarch64'. Later is available only for linux runners.
-      #    arch: 'amd64'
-      #- run: java -version
-      #
-      ## Install native-image
-      #- name: Install native-image component
-      #  run: |
-      #    gu install native-image
+      # Install graalvm
+      - uses: DeLaGuardo/setup-graalvm@5.0
+        with:
+          # GraalVM version, no pattern syntax available atm
+          graalvm: '21.3.0'
+          # Java version, optional, defaults to 'java8'. Available options are 'java8' and 'java11'.
+          java: 'java17'
+          # Architecture flag, optional, defaults to 'amd64'. Available options are 'amd64' and 'aarch64'. Later is available only for linux runners.
+          arch: 'amd64'
+      - run: java -version
 
-      ## Create native build
-      #- name: Create native build
-      #  run: |
-      #    ls -lh
-      #    mvn package -Dquarkus.package.type=native -Dmaven.test.skip=true
-      #    ls target
+      # Install native-image
+      - name: Install native-image component
+        run: |
+          gu install native-image
+
+      # Create native build
+      - name: Create native build
+        run: |
+          ls -lh
+          mvn package -Dquarkus.package.type=native -Dmaven.test.skip=true
+          ls target
 
       - name: copy binaries to server
         run: |
