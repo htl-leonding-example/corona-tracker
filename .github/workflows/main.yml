@@ -80,7 +80,6 @@ jobs:
       - name: copy binaries to server
         working-directory: backend
         run: |
-          ls -l target/
           scp -i ${{ secrets.SERVER_SSH_PRIVATE_KEY }} ./datasource.txt ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}
 
 
