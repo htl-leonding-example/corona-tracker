@@ -98,6 +98,8 @@ jobs:
          mvn package -Dquarkus.package.type=uber-jar
          docker image ls
          docker image tag htl-leonding/covid-tracker:${{ env.RELEASE_VERSION }} ghcr.io/${{ github.actor }}/corona-tracker:${{ env.RELEASE_VERSION }}
+         docker image tag htl-leonding/covid-tracker:${{ env.RELEASE_VERSION }} ghcr.io/${{ github.actor }}/corona-tracker:latest
          docker image ls
-         docker image push ghcr.io/${{ github.actor }}/corona-tracker:${{ env.RELEASE_VERSION }}
+         #docker image push ghcr.io/${{ github.actor }}/corona-tracker:${{ env.RELEASE_VERSION }}
+         docker image push --all-tags ghcr.io/${{ github.actor }}/corona-tracker
 
