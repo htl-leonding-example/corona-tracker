@@ -93,7 +93,7 @@ jobs:
 #          password: ${{ secrets.REGISTRY_ACCESS_TOKEN }}
 
       - name: Log in to registry
-        run: echo "${{ REGISTRY_ACCESS_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.REGISTRY_ACCESS_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
 
       - name: Create jvm build
