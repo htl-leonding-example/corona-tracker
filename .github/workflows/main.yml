@@ -88,7 +88,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      -name: Create jvm build
-       run: |
+      - name: Create jvm build
+        run: |
          mvn package -Dquarkus.package.type=uber-jar
          mvn clean package -Dquarkus.container-image.push=true -Dquarkus.container-image.registry=${{ env.REGISTRY }}
