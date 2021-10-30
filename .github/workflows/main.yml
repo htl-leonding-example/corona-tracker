@@ -98,11 +98,19 @@ jobs:
 
       - name: Create jvm build
         run: |
-         #mvn package -Dquarkus.package.type=uber-jar -Dquarkus.container-image.push=true -Dquarkus.container-image.registry=${{ env.REGISTRY }} -Dquarkus.jib.base-registry-username=${{ github.actor }} -Dquarkus.jib.base-registry-password=${{ secrets.REGISTRY_ACCESS_TOKEN }}
-         mvn package -Dquarkus.package.type=uber-jar
-         docker image tag htl-leonding/covid-tracker:${{ env.RELEASE_VERSION }} ghcr.io/${{ github.actor }}/corona-tracker:${{ env.RELEASE_VERSION }}
-         docker image tag htl-leonding/covid-tracker:${{ env.RELEASE_VERSION }} ghcr.io/${{ github.actor }}/corona-tracker:latest
-         docker image ls
-         #docker image push ghcr.io/${{ github.actor }}/corona-tracker:${{ env.RELEASE_VERSION }}
-         docker image push --all-tags ghcr.io/${{ github.actor }}/corona-tracker
+          #mvn package -Dquarkus.package.type=uber-jar -Dquarkus.container-image.push=true -Dquarkus.container-image.registry=${{ env.REGISTRY }} -Dquarkus.jib.base-registry-username=${{ github.actor }} -Dquarkus.jib.base-registry-password=${{ secrets.REGISTRY_ACCESS_TOKEN }}
+          mvn package -Dquarkus.package.type=uber-jar
+
+      - name: Push Image
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.actor }}/corona-tracker
+
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+
+          docker image tag htl-leonding/covid-tracker:${{ env.RELEASE_VERSION }} $IMAGE_ID:${{ env.RELEASE_VERSION }}
+          docker image tag htl-leonding/covid-tracker:${{ env.RELEASE_VERSION }} $IMAGE_ID:latest
+          docker image ls | grep htl-leonding
+          #docker image push ghcr.io/${{ github.actor }}/corona-tracker:${{ env.RELEASE_VERSION }}
+          docker image push --all-tags ghcr.io/${{ github.actor }}/corona-tracker
 
