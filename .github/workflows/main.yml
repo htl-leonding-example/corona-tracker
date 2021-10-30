@@ -53,33 +53,33 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-#      # Install graalvm
-#      - uses: DeLaGuardo/setup-graalvm@5.0
-#        with:
-#          # GraalVM version, no pattern syntax available atm
-#          graalvm: '21.3.0'
-#          # Java version, optional, defaults to 'java8'. Available options are 'java8' and 'java11'.
-#          java: 'java17'
-#          # Architecture flag, optional, defaults to 'amd64'. Available options are 'amd64' and 'aarch64'. Later is available only for linux runners.
-#          arch: 'amd64'
-#      - run: java -version
-#
-#      # Install native-image
-#      - name: Install native-image component
-#        run: |
-#          gu install native-image
-
-#      # Create native build
-#      - name: Create native build
-#        run: |
-#          ls -lh
-#          mvn package -Dquarkus.package.type=native -Dmaven.test.skip=true
-#          ls target
-#
-#      - name: copy binaries to server
-#        run: |
-#          ls -lh
-#          scp target/covtrack-${{ env.RELEASE_VERSION }}-runner ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/home/${{ secrets.SERVER_USER }}/
+      ## Install graalvm
+      #- uses: DeLaGuardo/setup-graalvm@5.0
+      #  with:
+      #    # GraalVM version, no pattern syntax available atm
+      #    graalvm: '21.3.0'
+      #    # Java version, optional, defaults to 'java8'. Available options are 'java8' and 'java11'.
+      #    java: 'java17'
+      #    # Architecture flag, optional, defaults to 'amd64'. Available options are 'amd64' and 'aarch64'. Later is available only for linux runners.
+      #    arch: 'amd64'
+      #- run: java -version
+      #
+      ## Install native-image
+      #- name: Install native-image component
+      #  run: |
+      #    gu install native-image
+      #
+      ## Create native build
+      #- name: Create native build
+      #  run: |
+      #    ls -lh
+      #    mvn package -Dquarkus.package.type=native -Dmaven.test.skip=true
+      #    ls target
+      #
+      #- name: copy binaries to server
+      #  run: |
+      #    ls -lh
+      #    scp target/covtrack-${{ env.RELEASE_VERSION }}-runner ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/home/${{ secrets.SERVER_USER }}/
 
       - name: Log in to the Container registry
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
