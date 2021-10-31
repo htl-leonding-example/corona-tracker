@@ -20,17 +20,17 @@ public class ListEntryResource {
 
     // Get all
 
-    /**
-     * http :8080/api/listentry Accept:'text/plain'
-     *
-     * @return
-     */
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public List<ListEntry> getAll() {
         return this.repo.listAll();
     }
 
+    /**
+     * http :8080/api/listentry Accept:text/plain
+     *
+     * @return
+     */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getAllCsv() {
