@@ -31,6 +31,7 @@ public class ListEntryResource {
      *
      * @return
      */
+    @Path("csv")
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getAllCsv() {
@@ -49,7 +50,7 @@ public class ListEntryResource {
                     listEntry.getEmail() + "," +
                     LocalDateTime
                             .ofInstant(listEntry.getTimestamp(), ZoneId.of("Europe/Vienna"))
-                            .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH.mm")) +
+                            .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")) +
                             System.lineSeparator()
             ;
             csvData.append(record);
