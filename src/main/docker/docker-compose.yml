@@ -4,21 +4,35 @@ services:
   postgres:
     image: "postgres:14-alpine"
     restart: always
-    ports:
-      - '5432:5432'
+    #    ports:
+    #      - '5432:5432'
     environment:
       - POSTGRES_USER=app
       - POSTGRES_PASSWORD=app
       - POSTGRES_DB=db
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+    networks:
+      - xibonet
 
-  covid-tracker:
+  covidtracker:
     image: ghcr.io/htl-leonding-example/corona-tracker:latest
     restart: always
-    ports:
-      - '8080:8080'
+    #   ports:
+    #     - '8080:8080'
     environment:
       - QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://postgres:5432/db
     depends_on:
       - postgres
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.covidtracker.rule=Host(`vm82.htl-leonding.ac.at`)"
+      - "traefik.http.routers.covidtracker.entrypoints=web"
+      - "traefik.http.services.covidtracker.loadbalancer.server.port=8080"
+    networks:
+      - xibonet
+
+networks:
+  xibonet:
+    external: true
+
