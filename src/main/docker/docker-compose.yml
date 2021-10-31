@@ -12,8 +12,6 @@ services:
       - POSTGRES_DB=db
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
-    networks:
-      - xibonet
 
   covid-tracker:
     image: ghcr.io/htl-leonding-example/corona-tracker:latest
@@ -24,16 +22,3 @@ services:
       - QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://postgres:5432/db
     depends_on:
       - postgres
-    labels:
-      - "traefik.enable=true"
-      - "traefik.backend=welcome"
-      - "traefik.frontend.rule=Host:vm82.htl-leonding.ac.at; PathPrefix: /welcome"
-      - "traefik.port=8080"
-      - "traefik.docker.network=xibonet"
-    networks:
-      - xibonet
-
-networks:
-  xibonet:
-    external:
-      name: xibonet
