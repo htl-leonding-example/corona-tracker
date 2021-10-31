@@ -8,7 +8,9 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.net.URI;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Path("/api/listentry")
@@ -17,17 +19,50 @@ public class ListEntryResource {
     ListEntryRepository repo;
 
     // Get all
+
+    /**
+     * http :8080/api/listentry Accept:'text/plain'
+     *
+     * @return
+     */
     @GET
-    @Produces({ MediaType.APPLICATION_JSON })
+    @Produces({MediaType.APPLICATION_JSON})
     public List<ListEntry> getAll() {
         return this.repo.listAll();
     }
 
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getAllCsv() {
+
+        String header = "id,lastname,firstname,phone,email,timestamp" + System.lineSeparator();
+
+        StringBuilder csvData = new StringBuilder();
+        csvData.append(header);
+
+        for (ListEntry listEntry : this.repo.listAll()) {
+            String record =
+                    listEntry.getId() + "," +
+                    listEntry.getLastName() + "," +
+                    listEntry.getFirstName() + "," +
+                    listEntry.getTelephoneNo() + "," +
+                    listEntry.getEmail() + "," +
+                    LocalDateTime
+                            .ofInstant(listEntry.getTimestamp(), ZoneId.of("Europe/Vienna"))
+                            .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH.mm")) +
+                            System.lineSeparator()
+            ;
+            csvData.append(record);
+        }
+        return csvData.toString();
+    }
+
+
     // Insert new
     @POST
     @Transactional
-    @Produces({ MediaType.APPLICATION_JSON })
-    @Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
     public Response addClient(
             @FormParam("first_name") String firstName,
             @FormParam("last_name") String lastName,
@@ -45,7 +80,7 @@ public class ListEntryResource {
 
     @GET
     @Path("html")
-    @Produces({ MediaType.TEXT_HTML })
+    @Produces({MediaType.TEXT_HTML})
     public String seeLogs() {
         List<ListEntry> entries = this.repo.listAll();
         StringBuilder response = new StringBuilder();

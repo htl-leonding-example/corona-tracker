@@ -1,10 +1,16 @@
 package info.stuetz.covtrack.entity;
 
+import javax.json.bind.annotation.JsonbDateFormat;
+import javax.json.bind.annotation.JsonbProperty;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 public class ListEntry {
@@ -18,7 +24,19 @@ public class ListEntry {
     private String email;
     private String telephoneNo;
 
+//    @JsonbTransient
+    @JsonbDateFormat("dd.MM.yyyy HH:mm")
     private Instant timestamp;
+
+//    /**
+//     * CET ... central european time)
+//     */
+//    @JsonbProperty("timestamp")
+//    public String timestampCET() {
+//        return LocalDateTime
+//                .ofInstant(timestamp, ZoneId.of("Europe/Vienna"))
+//                .format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+//    }
 
     public ListEntry() {
         this.timestamp = Instant.now();
@@ -69,6 +87,7 @@ public class ListEntry {
     }
 
     public Instant getTimestamp() {
+        //return timestamp.atZone(ZoneId.of("Europe/Vienna")).toInstant();
         return timestamp;
     }
 
