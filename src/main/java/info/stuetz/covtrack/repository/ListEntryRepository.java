@@ -1,6 +1,6 @@
-package at.mwllgr.repository;
+package info.stuetz.covtrack.repository;
 
-import at.mwllgr.entity.ListEntry;
+import info.stuetz.covtrack.entity.ListEntry;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 import javax.enterprise.context.ApplicationScoped;

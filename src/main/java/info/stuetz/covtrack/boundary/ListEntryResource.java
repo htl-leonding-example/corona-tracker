@@ -1,7 +1,7 @@
-package at.mwllgr.boundary;
+package info.stuetz.covtrack.boundary;
 
-import at.mwllgr.entity.ListEntry;
-import at.mwllgr.repository.ListEntryRepository;
+import info.stuetz.covtrack.entity.ListEntry;
+import info.stuetz.covtrack.repository.ListEntryRepository;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -49,10 +49,13 @@ public class ListEntryResource {
     public String seeLogs() {
         List<ListEntry> entries = this.repo.listAll();
         StringBuilder response = new StringBuilder();
+        response.append("<head><link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic\">");
+        response.append("<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css\">");
+        response.append("<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css\"></head><body>");
         for (ListEntry entry : entries) {
             response.append(entry.toString()).append("<br>");
         }
-
+        response.append("</body>");
         return response.toString();
     }
 }

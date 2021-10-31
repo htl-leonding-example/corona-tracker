@@ -1,4 +1,4 @@
-package at.mwllgr.entity;
+package info.stuetz.covtrack.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
