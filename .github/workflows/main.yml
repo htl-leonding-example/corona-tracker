@@ -126,4 +126,5 @@ jobs:
         run: |
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /opt/docker/corona-tracker && docker-compose down"
           scp src/main/docker/docker-compose.yml ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/opt/docker/corona-tracker/
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /opt/docker/corona-tracker && docker-compose pull"
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /opt/docker/corona-tracker && docker-compose up -d"
