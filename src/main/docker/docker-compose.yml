@@ -26,7 +26,7 @@ services:
       - postgres
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.covidtracker.rule=Host(`vm82.htl-leonding.ac.at`)"
+      - "traefik.http.routers.covidtracker.rule=Host(`welcome.htl-leonding.ac.at`)"
       #- "traefik.http.routers.covidtracker.rule=Path(`/api/listentry`)"
       - "traefik.http.routers.covidtracker.entrypoints=websecure"
       - "traefik.http.routers.covidtracker.tls.certresolver=myresolver"
