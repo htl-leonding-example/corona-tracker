@@ -100,7 +100,7 @@ public class ListEntry {
         //return this.getTimestamp() + " - " + this.getLastName() + ", " + this.getFirstName() + " - Tel.: " + this.getTelephoneNo();
         return this.getTimestamp().atZone(ZoneId.of("Europe/Vienna")).format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))
                 + " " + this.getFirstName()
-                + ": " + this.getLastName().substring(0,1) + "."
+                + " " + this.getLastName().substring(0,1) + "."
                 //+ ", " + this.getTelephoneNo()
                 //+ " (" + this.getEmail() + ")"
                 ;
