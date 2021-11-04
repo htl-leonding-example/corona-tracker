@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=10.0; user-scalable=1;" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=10.0; user-scalable=1;"/>
     <title>covtrack - Home</title>
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
@@ -14,57 +14,73 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
 
 </head>
-<body>
-    <h1>Willkommen</h1>
-    <h1>an der HTL Leonding</h1>
-    <hr>
-    <h2>Bitte registrieren Sie sich:</h2>
-    <form method="post" action="/api/listentry" id="reg-form" onsubmit="confirmRegistration()">
-        <fieldset>
-            <label for="firstName">Vorname</label>
-            <input type="text" autocomplete="off" name="first_name" id="firstName" placeholder="First Name">
-            <label for="lastName">Nachname</label>
-            <input type="text" autocomplete="off" name="last_name" id="lastName" placeholder="Last Name">
-            <label for="email">Email</label>
-            <input type="email" autocomplete="off" id="email" name="email" placeholder="Email"/>
-            <label for="phone">Telefon</label>
-            <input type="tel" autocomplete="off" name="telephoneNo" id="phone" placeholder="Phone Number">
-            <div class="row">
-            <input type="button" autocomplete="off" name="next" class="next action-button column column-100" id="action-button"
+<body style="margin: 10px">
+<div class="container" id="success-message"
+     style="display:none; text-align: center; background-color: #9b4dca; border-radius: 25px; margin-top: 10px; margin-bottom: 10px;">
+
+    <div class="row">
+        <div class="column" style="color: white; font-size: 34px;">✓</div>
+    </div>
+    <div class="row" style="padding-bottom: 5px">
+        <div class="column" style="color: white; font-size: 19px;">Anmeldung erfolgreich!</div>
+    </div>
+</div>
+<h1>Willkommen</h1>
+<h1>an der HTL Leonding</h1>
+<hr>
+<h2>Bitte registrieren Sie sich:</h2>
+<form method="post" action="/api/listentry" id="reg-form" onsubmit="confirmRegistration()">
+    <fieldset>
+        <label for="firstName">Vorname</label>
+        <input type="text" autocomplete="off" name="first_name" id="firstName" placeholder="First Name">
+        <label for="lastName">Nachname</label>
+        <input type="text" autocomplete="off" name="last_name" id="lastName" placeholder="Last Name">
+        <label for="email">Email</label>
+        <input type="email" autocomplete="off" id="email" name="email" placeholder="Email"/>
+        <label for="phone">Telefon</label>
+        <input type="tel" autocomplete="off" name="telephoneNo" id="phone" placeholder="Phone Number">
+        <div class="row">
+            <input type="button" autocomplete="off" name="next" class="next action-button column column-100"
+                   id="action-button"
                    value="Send"/>
-            </div>
-        </fieldset>
-    </form>
-    <small>v 1.0.2</small>
-    <hr>
+        </div>
+    </fieldset>
+</form>
+<small>v 1.0.2</small>
+<hr>
 
-    <h2>Logged visitors</h2>
-    <iframe src="/api/listentry/html" style="width: 100%; border: 0; font-family: 'Roboto Slab'"></iframe>
+<h2>Logged visitors</h2>
+<iframe src="/api/listentry/html" style="width: 100%; border: 0; font-family: 'Roboto Slab'"></iframe>
 
 
-    <script>
-        if(localStorage.getItem('first') !== null) {
-            document.getElementById('firstName').value = localStorage.getItem('first');
-            document.getElementById('lastName').value = localStorage.getItem('last');
-            document.getElementById('email').value = localStorage.getItem('email');
-            document.getElementById('phone').value = localStorage.getItem('phone');
-        }
+<script>
+    if (localStorage.getItem('first') !== null) {
+        document.getElementById('firstName').value = localStorage.getItem('first');
+        document.getElementById('lastName').value = localStorage.getItem('last');
+        document.getElementById('email').value = localStorage.getItem('email');
+        document.getElementById('phone').value = localStorage.getItem('phone');
+    }
+    if (localStorage.getItem("isSignedUp") === "true") {
+        document.getElementById("success-message").style.display = "block";
+        localStorage.removeItem("isSignedUp");
+    }
 
-        document.getElementById('action-button').addEventListener("click", function() {
-            submitForm();
-        });
+    document.getElementById('action-button').addEventListener("click", function () {
+        submitForm();
+    });
 
-        function submitForm() {
-                localStorage.setItem('first', document.getElementById('firstName').value);
-                localStorage.setItem('last', document.getElementById('lastName').value);
-                localStorage.setItem('email', document.getElementById('email').value);
-                localStorage.setItem('phone', document.getElementById('phone').value);
-                document.getElementById('reg-form').submit();
-        }
+    function submitForm() {
+        localStorage.setItem('first', document.getElementById('firstName').value);
+        localStorage.setItem('last', document.getElementById('lastName').value);
+        localStorage.setItem('email', document.getElementById('email').value);
+        localStorage.setItem('phone', document.getElementById('phone').value);
+        localStorage.setItem('isSignedUp', "true");
+        document.getElementById('reg-form').submit();
+    }
 
-        function confirmRegistration() {
-            alert("Danke für Ihre Anmeldung")
-        }
-    </script>
+    function confirmRegistration() {
+        alert("Danke für Ihre Anmeldung")
+    }
+</script>
 </body>
 </html>
