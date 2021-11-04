@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v2
 
       # configure known_hosts
-      - name install ssh-key
+      - name: install ssh-key
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
