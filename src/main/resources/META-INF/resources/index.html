@@ -32,13 +32,13 @@
 <form method="post" action="/api/listentry" id="reg-form" onsubmit="confirmRegistration()">
     <fieldset>
         <label for="firstName">Vorname</label>
-        <input type="text" autocomplete="off" name="first_name" id="firstName" placeholder="First Name">
+        <input type="text" required autocomplete="off" name="first_name" id="firstName" placeholder="First Name">
         <label for="lastName">Nachname</label>
-        <input type="text" autocomplete="off" name="last_name" id="lastName" placeholder="Last Name">
+        <input type="text" required autocomplete="off" name="last_name" id="lastName" placeholder="Last Name">
         <label for="email">Email</label>
-        <input type="email" autocomplete="off" id="email" name="email" placeholder="Email"/>
+        <input type="email" required autocomplete="off" id="email" name="email" placeholder="Email"/>
         <label for="phone">Telefon</label>
-        <input type="tel" autocomplete="off" name="telephoneNo" id="phone" placeholder="Phone Number">
+        <input type="tel" required autocomplete="off" name="telephoneNo" id="phone" placeholder="Phone Number">
         <div class="row">
             <input type="button" autocomplete="off" name="next" class="next action-button column column-100"
                    id="action-button"
