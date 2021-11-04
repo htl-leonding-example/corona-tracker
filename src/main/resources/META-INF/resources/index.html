@@ -19,7 +19,7 @@
     <h1>an der HTL Leonding</h1>
     <hr>
     <h2>Bitte registrieren Sie sich:</h2>
-    <form method="post" action="/api/listentry" id="reg-form">
+    <form method="post" action="/api/listentry" id="reg-form" onsubmit="confirmRegistration()">
         <fieldset>
             <label for="firstName">Vorname</label>
             <input type="text" autocomplete="off" name="first_name" id="firstName" placeholder="First Name">
@@ -60,6 +60,10 @@
                 localStorage.setItem('email', document.getElementById('email').value);
                 localStorage.setItem('phone', document.getElementById('phone').value);
                 document.getElementById('reg-form').submit();
+        }
+
+        function confirmRegistration() {
+            alert("Danke für Ihre Anmeldung")
         }
     </script>
 </body>
