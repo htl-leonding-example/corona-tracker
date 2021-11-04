@@ -29,7 +29,7 @@
 <h1>an der HTL Leonding</h1>
 <hr>
 <h2>Bitte registrieren Sie sich:</h2>
-<form method="post" action="/api/listentry" id="reg-form" onsubmit="confirmRegistration()">
+<form method="post" action="/api/listentry" id="reg-form" onsubmit="confirmRegistration()" name="reg-form">
     <fieldset>
         <label for="firstName">Vorname</label>
         <input type="text" required autocomplete="off" name="first_name" id="firstName" placeholder="First Name">
@@ -54,6 +54,7 @@
 
 
 <script>
+
     if (localStorage.getItem('first') !== null) {
         document.getElementById('firstName').value = localStorage.getItem('first');
         document.getElementById('lastName').value = localStorage.getItem('last');
@@ -70,12 +71,16 @@
     });
 
     function submitForm() {
-        localStorage.setItem('first', document.getElementById('firstName').value);
-        localStorage.setItem('last', document.getElementById('lastName').value);
-        localStorage.setItem('email', document.getElementById('email').value);
-        localStorage.setItem('phone', document.getElementById('phone').value);
-        localStorage.setItem('isSignedUp', "true");
-        document.getElementById('reg-form').submit();
+        if (document.forms["reg-form"].checkValidity()) {
+            localStorage.setItem('first', document.getElementById('firstName').value);
+            localStorage.setItem('last', document.getElementById('lastName').value);
+            localStorage.setItem('email', document.getElementById('email').value);
+            localStorage.setItem('phone', document.getElementById('phone').value);
+            localStorage.setItem('isSignedUp', "true");
+            document.getElementById('reg-form').submit();
+        } else {
+            alert("Feld darf nicht leer sein")
+        }
     }
 
     function confirmRegistration() {
